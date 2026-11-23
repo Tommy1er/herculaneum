@@ -16,6 +16,29 @@ def fbeta(precision: float, recall: float, beta: float) -> float:
     return _safe_div((1 + b2) * precision * recall, b2 * precision + recall)
 
 
+def as_binary(array: np.ndarray, name: str) -> np.ndarray:
+    """Return ``array`` as bool, refusing anything that is not already binary.
+
+    Only bool arrays and numeric arrays whose values are all 0 or 1 are
+    accepted. A probability map (0.3, 0.7...) or a 0/255 image raises instead
+    of being silently turned into "nonzero = True": threshold or rescale it
+    explicitly first.
+    """
+    a = np.asarray(array)
+    if a.dtype == bool:
+        return a
+    if not (np.issubdtype(a.dtype, np.integer) or np.issubdtype(a.dtype, np.floating)):
+        raise TypeError(f"{name}: expected a bool or numeric array, got dtype {a.dtype}")
+    bad = (a != 0) & (a != 1)
+    if bad.any():
+        examples = np.unique(a[bad])[:5].tolist()
+        raise ValueError(
+            f"{name}: values must be 0/1 or bool, found {examples}; "
+            "threshold probabilities or rescale 0/255 masks before scoring"
+        )
+    return a.astype(bool)
+
+
 def binary_scores(
     pred: np.ndarray,
     target: np.ndarray,
@@ -25,21 +48,24 @@ def binary_scores(
 
     Args:
         pred: predicted ink mask (bool or 0/1), any shape.
-        target: reference ink mask, same shape as ``pred``.
-        valid: optional mask of pixels to score (e.g. papyrus only). Pixels
-            where ``valid`` is False are ignored.
+        target: reference ink mask (bool or 0/1), same shape as ``pred``.
+        valid: optional mask (bool or 0/1) of pixels to score, e.g. annotated
+            papyrus only. Pixels where ``valid`` is False are ignored.
+
+    Raises:
+        ValueError: on shape mismatch or non-binary values (see ``as_binary``).
 
     Returns:
         Counts (tp, fp, fn, tn) and precision, recall, f1, f05.
     """
-    pred = np.asarray(pred).astype(bool)
-    target = np.asarray(target).astype(bool)
+    pred = as_binary(pred, "pred")
+    target = as_binary(target, "target")
     if pred.shape != target.shape:
         raise ValueError(f"shape mismatch: pred {pred.shape} vs target {target.shape}")
     if valid is None:
         valid = np.ones(pred.shape, dtype=bool)
     else:
-        valid = np.asarray(valid).astype(bool)
+        valid = as_binary(valid, "valid")
         if valid.shape != pred.shape:
             raise ValueError(f"shape mismatch: valid {valid.shape} vs pred {pred.shape}")
 
