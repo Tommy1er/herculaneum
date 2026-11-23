@@ -50,3 +50,13 @@ Documentation de l'équipe en français. Code, commentaires, messages de commit 
 | Claude | Code, tests, CI, préparation des PR | Ne fusionne pas dans `main` |
 | Qwen | Relecture de code, méthode alternative indépendante | Ne réécrit pas le code d'un autre sans PR séparée |
 | Abdoulaye | Priorités, fusion, soumissions, Discord | — |
+
+## Traçabilité des livrables IA (directive du 2026-11-23)
+
+**Tous les livrables utiles de ChatGPT, Claude et Qwen ou GLM 5.3 doivent être enregistrés sur GitHub** : code, tests, protocoles, résultats positifs **et négatifs**, relectures et conclusions. Un message en conversation ne tient pas lieu de livraison.
+
+- Utiliser sa branche de tâche, puis une PR vers `main` ; ne pas pousser directement sur `main`. Abdoulaye garde la décision de fusion.
+- Pour une expérience : conserver les commandes, le hash Git, les références exactes des données, les paramètres, les métriques et les limites dans `experiments/<id>/results/`.
+- Pour un audit ou une relecture : déposer une note Markdown avec fichiers/sections concernés, sévérité, preuves, limites et décisions proposées ; ne pas déclarer avoir exécuté un test non réalisé.
+- Les sorties conversationnelles brutes ne sont pas obligatoires : **le livrable vérifiable** l'est. Ne jamais versionner tokens, mots de passe, informations privées, modèles volumineux ou grands scans.
+- Si un modèle ne peut pas écrire directement dans le dépôt, il livre un patch ou fichier à transmettre pour commit ; une livraison sans commit/PR reste **en attente**, pas « faite ».
