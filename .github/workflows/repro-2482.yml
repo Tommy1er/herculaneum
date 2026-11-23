@@ -1,0 +1,55 @@
+name: repro-villa-2482
+
+# Builds the official vc_reader from ScrollPrize/villa and runs upstream/2482/repro.py.
+on:
+  workflow_dispatch:
+    inputs:
+      villa_ref:
+        description: "villa branch, tag or commit"
+        default: "main"
+  push:
+    paths:
+      - "upstream/2482/**"
+      - ".github/workflows/repro-2482.yml"
+
+jobs:
+  repro:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/checkout@v4
+        with:
+          repository: ScrollPrize/villa
+          ref: ${{ github.event.inputs.villa_ref || 'main' }}
+          path: villa
+          sparse-checkout: vc_reader
+          lfs: false
+
+      - name: Native build dependencies (subset of villa's test-vesuvius.yml)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential ninja-build pkg-config \
+            libblosc-dev libblosc2-dev libboost-dev libcurl4-openssl-dev \
+            libjpeg-dev liblz4-dev libpng-dev libsqlite3-dev libtiff-dev \
+            libzstd-dev nlohmann-json3-dev zlib1g-dev
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build vc_reader
+        run: pip install numpy tifffile ./villa/vc_reader
+
+      - name: Run reproduction
+        run: |
+          COMMIT=$(git -C villa rev-parse HEAD)
+          echo "villa commit: $COMMIT"
+          python upstream/2482/repro.py --villa-commit "$COMMIT" --out results-2482.json
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: results-2482
+          path: results-2482.json
