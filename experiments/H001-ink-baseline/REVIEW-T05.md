@@ -24,6 +24,6 @@
 
 ## Décision
 
-**T05 : livrable produit, en relecture.** Conditions d'ouverture de T07/T08 : T06 avec masque fiable + alignment vérifié, split figé et non vide, métriques sur données binaires, CI verte. Le protocole modifié figure dans le README voisin.
+**T05 : protocole validé dans la PR #1.** Conditions d'ouverture de T07/T08 : T06 avec masque fiable + alignement vérifié, split figé et non vide, métriques sur données binaires, CI verte. Le protocole modifié figure dans le README voisin.
 
 Aucune mesure quantitative de performance scientifique n'est revendiquée.

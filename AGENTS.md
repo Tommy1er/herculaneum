@@ -61,9 +61,3 @@ Documentation de l'équipe en français. Code, commentaires, messages de commit 
 - Pour un audit ou une relecture : déposer une note Markdown avec fichiers/sections concernés, sévérité, preuves, limites et décisions proposées ; ne pas déclarer avoir exécuté un test non réalisé.
 - Les sorties conversationnelles brutes ne sont pas obligatoires : **le livrable vérifiable** l'est. Ne jamais versionner tokens, mots de passe, informations privées, modèles volumineux ou grands scans.
 - Si un modèle ne peut pas écrire directement dans le dépôt, il livre un patch ou fichier à transmettre pour commit ; une livraison sans commit/PR reste **en attente**, pas « faite ».
-
-## Répartition transitoire (2026-11-23)
-
-- **GLM 5.3 est actif** et peut développer sur une branche `glm/<id>-<sujet>` ; ses modifications doivent avoir tests et PR. Pour T04, si GLM a modifié le code évalué, la relecture finale doit être faite par **Claude ou ChatGPT**, pas par GLM lui-même.
-- **Qwen est temporairement indisponible** pour raison technique et n'est pas attendu pour débloquer T04/T08 ; il reprendra avec une tâche distincte à son retour.
-- **Deux PR touchent H001 : #1 et #2.** Revoir et dédupliquer les modifications avant toute fusion ; ni écrasement ni fusion automatique. `main` reste la référence jusqu'à décision du directeur.
