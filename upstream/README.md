@@ -13,9 +13,13 @@ Dépôt officiel : https://github.com/ScrollPrize/villa — liste des issues : h
 
 | # | Sujet | Ouverte | Pourquoi elle nous intéresse | Statut pour nous |
 |---|-------|---------|------------------------------|------------------|
-| [2458](https://github.com/ScrollPrize/villa/issues/2458) | Deux configs `lasagna` placent `tifxyz-flow-gate-channels` dans `base` au lieu de `args` | 2026-11-06, addisonflay | Modèle du bon type de contribution : bug concret, sans GPU, testable | **Ne pas prendre** — l'auteur prévoit sa propre PR (une PR #2463 est mentionnée) |
+| [2458](https://github.com/ScrollPrize/villa/issues/2458) | Deux configs `lasagna` placent `tifxyz-flow-gate-channels` dans `base` au lieu de `args` | 2026-11-06, addisonflay | Modèle du bon type de contribution : bug concret, sans GPU, testable | **Exclue** — PR [#2463](https://github.com/ScrollPrize/villa/pull/2463) ouverte, avec tests, vérifiée par un autre contributeur (ChatGPT, 2026-11-23) |
+| [2105](https://github.com/ScrollPrize/villa/issues/2105) | Erreur dans un README | — | — | **Exclue** — PR #2454 déjà ouverte (ChatGPT, 2026-11-23) |
+| [2522](https://github.com/ScrollPrize/villa/issues/2522) | Optimisation CPU | — | — | **Exclue** — PR #2521 déjà ouverte (ChatGPT, 2026-11-23) |
+| [2482](https://github.com/ScrollPrize/villa/issues/2482) | Un masque contenant des valeurs intermédiaires est interprété différemment par le code C++ et par sa documentation | — | Testable avec de petites données synthétiques, sans GPU | **À examiner en priorité** — aucune correction repérée ; comportement attendu à faire préciser par les mainteneurs (ChatGPT, 2026-11-23) |
+| [2478](https://github.com/ScrollPrize/villa/issues/2478) | Estimer le volume à télécharger avant un rendu | — | Utile, sans GPU | **À suivre** — proposition en attente d'avis des mainteneurs (ChatGPT, 2026-11-23) |
 
-## Candidates à vérifier (T09)
+## Anciennes candidates à vérifier (T09)
 
 Relevé partiel de la page des issues le 2026-11-23 : la page lue ne montrait que des issues de septembre 2026, sans commentaires ni PR liées. **Chaque ligne doit être vérifiée à la main** (toujours ouverte ? PR existante ? quelqu'un dessus ?) avant d'y travailler.
 
