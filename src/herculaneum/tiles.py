@@ -41,7 +41,8 @@ def spatial_split(
     tile: int,
     test_fraction: float = 0.25,
     axis: int = 1,
-    gap: int = 0,
+    *,
+    gap: int,
 ) -> tuple[list[Tile], list[Tile]]:
     """Split full tiles into (tune, test) by position along ``axis``.
 
@@ -49,6 +50,11 @@ def spatial_split(
     whose near edge is at or after ``boundary + gap`` go to test; tiles in
     between are dropped. ``boundary`` sits at ``(1 - test_fraction)`` of the
     axis length.
+
+    ``gap`` has no default on purpose: it must be at least the largest x/y
+    context radius of any method evaluated (H001 protocol). The two sets are
+    then at least ``2 * gap`` pixels apart, so a filter of radius ``gap`` never
+    reads the same raw pixel from both sides.
     """
     if not 0 < test_fraction < 1:
         raise ValueError("test_fraction must be in (0, 1)")

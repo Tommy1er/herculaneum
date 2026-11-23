@@ -11,7 +11,7 @@ def test_grid_drops_partial_tiles():
 
 @pytest.mark.parametrize("axis", [0, 1])
 def test_split_is_disjoint_and_ordered(axis):
-    tune, test = spatial_split((256, 256), 32, test_fraction=0.25, axis=axis)
+    tune, test = spatial_split((256, 256), 32, test_fraction=0.25, axis=axis, gap=0)
     assert tune and test
     assert not (tiles_mask((256, 256), tune) & tiles_mask((256, 256), test)).any()
     key = (lambda t: (t.y0, t.y1)) if axis == 0 else (lambda t: (t.x0, t.x1))
@@ -26,8 +26,13 @@ def test_gap_keeps_sets_apart():
 
 def test_invalid_arguments():
     with pytest.raises(ValueError):
-        spatial_split((64, 64), 16, test_fraction=1.0)
+        spatial_split((64, 64), 16, test_fraction=1.0, gap=0)
     with pytest.raises(ValueError):
-        spatial_split((64, 64), 16, axis=2)
+        spatial_split((64, 64), 16, axis=2, gap=0)
     with pytest.raises(ValueError):
         spatial_split((64, 64), 16, gap=-1)
+
+
+def test_gap_must_be_explicit():
+    with pytest.raises(TypeError):
+        spatial_split((64, 64), 16)

@@ -43,3 +43,23 @@ def test_valid_mask_ignores_pixels():
 def test_shape_mismatch_raises():
     with pytest.raises(ValueError):
         binary_scores(np.zeros((2, 2)), np.zeros((2, 3)))
+
+
+def test_float_zero_one_is_accepted():
+    s = binary_scores(np.array([1.0, 0.0]), np.array([1, 0], dtype=np.uint8))
+    assert s["f1"] == 1.0
+
+
+@pytest.mark.parametrize("bad", [np.array([0.3, 0.7]), np.array([0, 255], dtype=np.uint8), np.array([-1, 0])])
+def test_non_binary_values_are_rejected(bad):
+    with pytest.raises(ValueError, match="0/1 or bool"):
+        binary_scores(bad, np.zeros(2))
+    with pytest.raises(ValueError, match="target"):
+        binary_scores(np.zeros(2), bad)
+    with pytest.raises(ValueError, match="valid"):
+        binary_scores(np.zeros(2), np.zeros(2), bad)
+
+
+def test_non_numeric_dtype_is_rejected():
+    with pytest.raises(TypeError):
+        binary_scores(np.array(["1", "0"]), np.zeros(2))
