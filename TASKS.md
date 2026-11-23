@@ -8,7 +8,7 @@ Une ligne = un livrable vérifiable. Statuts : `à faire`, `en cours`, `en relec
 | T02 | Vérifier le Lenovo (`python scripts/check_env.py`) | Abdoulaye | Sortie du script collée dans `docs/contexte.md` | à faire |
 | T03 | Métriques et découpage spatial (`src/herculaneum`) | Claude | Code + tests | fait — à relire par Qwen |
 | T04 | Relire T03 | Qwen | Commentaires sur la PR ou « OK » | à faire |
-| T05 | Valider le protocole H001 (`experiments/H001-ink-baseline/README.md`) | ChatGPT | Protocole corrigé ou « OK » | à faire |
+| T05 | Valider le protocole H001 (`experiments/H001-ink-baseline/README.md`) | ChatGPT | Protocole corrigé ou « OK » | en relecture |
 | T06 | Exécuter les notebooks officiels *Scroll Data Access* et *Ink Detection* sur Colab | Abdoulaye + Claude | Un petit extrait de fragment + son masque d'encre, et la procédure notée | à faire |
 | T07 | Référence naïve H001 (seuils simples) | Claude | Tableau de scores dans `results/` | à faire (après T06) |
 | T08 | Méthode alternative H001 indépendante | Qwen | Tableau de scores dans `results/` | à faire (après T06) |
