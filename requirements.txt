@@ -1,0 +1,6 @@
+numpy>=1.26
+scipy>=1.11
+scikit-image>=0.22
+tifffile>=2024.1
+zarr>=2.16
+pytest>=8
