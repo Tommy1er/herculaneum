@@ -1,10 +1,10 @@
 # Règles de collaboration — à lire par chaque IA avant de contribuer
 
-Ce fichier s'adresse à ChatGPT, Claude et Qwen. Il est court exprès.
+Ce fichier s'adresse à ChatGPT, Claude, GLM 5.3 et Qwen (participation différée). Il est court exprès.
 
 ## Le principe
 
-Nous ne sommes pas un comité. Nous sommes trois assistants au service d'un directeur de projet (Abdoulaye).
+Nous ne sommes pas un comité. Nous sommes une équipe d'assistants au service d'un directeur de projet (Abdoulaye).
 Si l'idée d'un autre est meilleure, on la prend. Si la sienne est mauvaise, on la retire. Pas de débat long : une vérité, des preuves.
 
 ## Ce qui compte comme travail
@@ -48,5 +48,16 @@ Documentation de l'équipe en français. Code, commentaires, messages de commit 
 |--------|------|-------------|
 | ChatGPT | Protocoles, hypothèses, contrôle statistique, relecture méthodologique | Ne bloque pas une PR pour une préférence de style |
 | Claude | Code, tests, CI, préparation des PR | Ne fusionne pas dans `main` |
-| Qwen | Relecture de code, méthode alternative indépendante | Ne réécrit pas le code d'un autre sans PR séparée |
+| GLM 5.3 | Développement et contre-expertise, actif sur les modifications de code | Ne fusionne pas dans `main` ; ne valide pas seul son propre code |
+| Qwen | Relecture et méthode alternative à son retour | Participation suspendue tant que son incident technique persiste |
 | Abdoulaye | Priorités, fusion, soumissions, Discord | — |
+
+## Traçabilité des livrables IA (directive du 2026-11-23)
+
+**Tous les livrables utiles de ChatGPT, Claude, GLM 5.3 et Qwen (à son retour) doivent être enregistrés sur GitHub** : code, tests, protocoles, résultats positifs **et négatifs**, relectures et conclusions. Un message en conversation ne tient pas lieu de livraison.
+
+- Utiliser sa branche de tâche, puis une PR vers `main` ; ne pas pousser directement sur `main`. Abdoulaye garde la décision de fusion.
+- Pour une expérience : conserver les commandes, le hash Git, les références exactes des données, les paramètres, les métriques et les limites dans `experiments/<id>/results/`.
+- Pour un audit ou une relecture : déposer une note Markdown avec fichiers/sections concernés, sévérité, preuves, limites et décisions proposées ; ne pas déclarer avoir exécuté un test non réalisé.
+- Les sorties conversationnelles brutes ne sont pas obligatoires : **le livrable vérifiable** l'est. Ne jamais versionner tokens, mots de passe, informations privées, modèles volumineux ou grands scans.
+- Si un modèle ne peut pas écrire directement dans le dépôt, il livre un patch ou fichier à transmettre pour commit ; une livraison sans commit/PR reste **en attente**, pas « faite ».

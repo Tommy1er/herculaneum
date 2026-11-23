@@ -1,6 +1,6 @@
 # H001 — Détection d'encre par méthodes légères
 
-**Statut :** protocole révisé (T05), en relecture. T06 fournira les données.
+**Statut :** protocole validé (PR #1). T06 fournira les données.
 
 ## Question
 
@@ -22,7 +22,7 @@ Les méthodes classiques obtiendront des scores faibles (l'encre carbonée contr
 - Tous les paramètres (seuils, couches, tailles de filtres) sont choisis **uniquement** sur les tuiles de réglage.
 - Les tuiles de test ne sont évaluées qu'**une fois**, à la fin.
 
-Avant d’examiner les annotations de test, enregistrer l’origine du recadrage (x, y, z), ses dimensions, l’ordre des axes, la correspondance entre couches et masques, et les sommes SHA-256 des entrées. Choisir l’extrait et l’orientation de la bande par une règle géométrique indépendante de la présence d’encre. Vérifier l’alignement sur le réglage.
+Avant d’examiner les annotations de test, enregistrer l’origine du recadrage (x, y, z), ses dimensions, l’ordre des axes, la correspondance entre couches et masques, et les sommes SHA-256 des entrées. Choisir l’extrait et l’orientation de la bande par une règle géométrique indépendante de la présence d’encre. Vérifier visuellement la superposition du volume et du masque uniquement sur les tuiles de réglage. Consigner les références, les transformations et la licence dans une copie de `manifest.template.json`. Renseigner les effectifs par classe du test après gel des méthodes.
 
 Fixer les arguments de `spatial_split` (taille de tuile, axe, fraction de test, marge en pixels) et sauvegarder les rectangles obtenus. La fonction écarte les tuiles partielles et applique la marge de chaque côté de la frontière. Vérifier que les deux ensembles contiennent des pixels évaluables. Publier leur effectif réel.
 
@@ -41,7 +41,7 @@ Avant le test, consigner pour B1, C1 et Q1 les couches, polarités, seuils et au
 
 ## Mesures
 
-Évaluer toutes les méthodes sur les mêmes pixels annotés et valides de papyrus. Distinguer le fond, les pixels non annotés et l’absence d’encre. Vérifier l’encodage avant conversion en booléen. Sans masque du support, utiliser une région documentée entièrement sur papyrus avec annotation exhaustive, ou différer le score principal.
+Évaluer toutes les méthodes sur les mêmes pixels annotés et valides de papyrus. Distinguer le fond, les pixels non annotés et l’absence d’encre. Binariser explicitement les scores au seuil gelé avant `binary_scores` et vérifier l’encodage des masques avant conversion en booléen. Sans masque du support, utiliser une région documentée entièrement sur papyrus avec annotation exhaustive, ou différer le score principal.
 
 Cumuler VP, FP, FN et VN sur ces pixels, puis calculer précision, rappel, F1 et F0.5 avec `herculaneum.metrics.binary_scores` (un seul appel sur le masque d’évaluation complet convient). Une moyenne des scores par tuile donnerait un autre résultat. Publier les quatre effectifs, la prévalence et les deux B0 séparément. La fonction renvoie zéro pour un dénominateur nul : signaler ce cas. Si le test est vide, aucun score ; s’il est dépourvu d’encre, le signaler et ne pas conclure sur la capacité de détection.
 
