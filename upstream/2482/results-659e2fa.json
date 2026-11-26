@@ -1,0 +1,61 @@
+{
+  "issue": "ScrollPrize/villa#2482",
+  "villa_commit": "659e2fadb836d44063ed831d85517154ec852f11",
+  "python": "3.12.16",
+  "platform": "Linux-7.0.0-1017-azure-x86_64-with-glibc2.39",
+  "grid": [
+    12,
+    12
+  ],
+  "value_case": {
+    "vc_reader": {
+      "vertex_valid_by_mask_value": {
+        "0": false,
+        "1": true,
+        "128": true,
+        "254": true,
+        "255": true
+      },
+      "all_other_vertices_valid": true
+    },
+    "vc_object_store": {
+      "vertex_valid_by_mask_value": {
+        "0": false,
+        "1": false,
+        "128": false,
+        "254": false,
+        "255": true
+      },
+      "all_other_vertices_valid": true
+    },
+    "readers_disagree_on_mask_values": [
+      "1",
+      "128",
+      "254"
+    ],
+    "readers_disagree_on_other_vertices": 0
+  },
+  "size_case": {
+    "mask_shape": [
+      9,
+      9
+    ],
+    "vc_reader": {
+      "outcome": "error",
+      "error_type": "ValueError",
+      "message": "/tmp/tmpxm8sgotc/size/mask.tif: tifxyz mask shape (9, 9) does not match the coordinate grid"
+    },
+    "vc_object_store": {
+      "outcome": "rejected",
+      "message": [
+        "/tmp/tmpxm8sgotc/size: mask.tif must be a whole multiple of the points grid: /tmp/tmpxm8sgotc/size"
+      ]
+    }
+  },
+  "vc_reader_differs_from_documented_rule": [
+    "1",
+    "128",
+    "254"
+  ],
+  "github_actions_run": "https://github.com/Tommy1er/herculaneum/actions/runs/45866382414"
+}
