@@ -1,6 +1,7 @@
 name: repro-villa-2482
 
-# Builds the official vc_reader from ScrollPrize/villa and runs upstream/2482/repro.py.
+# Builds the official vc_reader and vc_object_store tools from ScrollPrize/villa
+# and runs upstream/2482/repro.py with both readers on the same files.
 on:
   workflow_dispatch:
     inputs:
@@ -15,7 +16,7 @@ on:
 jobs:
   repro:
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
 
@@ -24,30 +25,40 @@ jobs:
           repository: ScrollPrize/villa
           ref: ${{ github.event.inputs.villa_ref || 'main' }}
           path: villa
-          sparse-checkout: vc_reader
+          sparse-checkout: |
+            vc_reader
+            vc_object_store
           lfs: false
 
-      - name: Native build dependencies (subset of villa's test-vesuvius.yml)
+      - name: Native build dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
-            build-essential ninja-build pkg-config \
+            build-essential cmake ninja-build pkg-config \
             libblosc-dev libblosc2-dev libboost-dev libconcurrentqueue-dev libcurl4-openssl-dev \
-            libjpeg-dev liblz4-dev libpng-dev libsqlite3-dev libtiff-dev \
+            libjpeg-dev liblz4-dev libopencv-dev libpng-dev libsqlite3-dev libssl-dev libtiff-dev \
             libzstd-dev nlohmann-json3-dev zlib1g-dev
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Build vc_reader
+      - name: Build vc_reader (reader A)
         run: pip install numpy tifffile ./villa/vc_reader
+
+      - name: Build vc_object_store ingest/export tools (reader B)
+        run: |
+          cmake -S villa/vc_object_store -B vos-build -G Ninja -DCMAKE_BUILD_TYPE=Release \
+            -DVC_OBJECT_STORE_BUILD_SERVER=OFF -DVC_OBJECT_STORE_BUILD_LINKING=OFF \
+            -DVC_OBJECT_STORE_BUILD_TESTS=OFF -DVC_OBJECT_STORE_BUILD_PYTHON=OFF \
+            -DVC_OBJECT_STORE_BUILD_BENCHMARKS=OFF
+          cmake --build vos-build --target vc_object_ingest vc_object_export
 
       - name: Run reproduction
         run: |
           COMMIT=$(git -C villa rev-parse HEAD)
           echo "villa commit: $COMMIT"
-          python upstream/2482/repro.py --villa-commit "$COMMIT" --out results-2482.json
+          python upstream/2482/repro.py --villa-commit "$COMMIT" --vos-bin vos-build/bin --out results-2482.json
 
       - uses: actions/upload-artifact@v4
         with:
