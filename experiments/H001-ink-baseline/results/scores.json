@@ -1,0 +1,74 @@
+{
+  "experiment": "H001",
+  "frozen_file": "results/frozen.json",
+  "frozen_sha256": "245ed45e2c30ad6b4dc4caf315e73accacd253892303dd56d184740fc65b760f",
+  "code_commit_at_evaluation": "ac373c4ad5e82a5a252c0015200a45cb2a30c3e9",
+  "test_pixels": 1310720,
+  "test_ink_pixels": 232600,
+  "test_prevalence": 0.17746,
+  "zero_denominator_cases": [
+    "B0_all_no_ink"
+  ],
+  "scores": {
+    "B0_all_no_ink": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 232600,
+      "tn": 1078120,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "f05": 0.0
+    },
+    "B0_all_ink": {
+      "tp": 232600,
+      "fp": 1078120,
+      "fn": 0,
+      "tn": 0,
+      "precision": 0.177459716796875,
+      "recall": 1.0,
+      "f1": 0.3014280900914911,
+      "f05": 0.21240146982547647
+    },
+    "B1": {
+      "tp": 195906,
+      "fp": 793178,
+      "fn": 36694,
+      "tn": 284942,
+      "precision": 0.19806811150519066,
+      "recall": 0.8422441960447119,
+      "f1": 0.3207146856306541,
+      "f05": 0.23383742315471043,
+      "config": {
+        "layers": [
+          24,
+          41
+        ],
+        "sigma": null,
+        "polarity": -1,
+        "threshold": -103.05882263183594,
+        "tune_f05": 0.258201
+      }
+    },
+    "C1": {
+      "tp": 230808,
+      "fp": 1067155,
+      "fn": 1792,
+      "tn": 10965,
+      "precision": 0.1778232507398131,
+      "recall": 0.9922957867583835,
+      "f1": 0.30159882343947947,
+      "f05": 0.21274775774585156,
+      "config": {
+        "layers": [
+          30,
+          35
+        ],
+        "sigma": 8.0,
+        "polarity": 1,
+        "threshold": -37.366017532348636,
+        "tune_f05": 0.255471
+      }
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "status": "data fetched; split and methods not yet frozen",
+  "fragment_id": "PHercParis4",
+  "surface_id": "w00_20231016151002",
+  "source_volume_uri": "https://huggingface.co/buckets/scrollprize/datasets/resolve/ink/phercparis4/w00_20231016151002/w00_20231016151002.zarr/0",
+  "source_mask_uri": "https://huggingface.co/buckets/scrollprize/datasets/resolve/ink/phercparis4/w00_20231016151002/w00_20231016151002_inklabels.zarr/0",
+  "source_validity_mask_uri": "https://huggingface.co/buckets/scrollprize/datasets/resolve/ink/phercparis4/w00_20231016151002/w00_20231016151002_supervision_mask.zarr/0",
+  "source_index": "https://scrollprize.org/tutorial5",
+  "license_and_attribution": "Vesuvius Challenge open data; check scrollprize.org data terms before redistribution",
+  "access_date_utc": "2026-11-26T17:20:01+00:00",
+  "source_array_shape_zyx": [
+    65,
+    32249,
+    51380
+  ],
+  "source_chunks_zyx": [
+    65,
+    128,
+    128
+  ],
+  "selected_roi_zyx": {
+    "z": [
+      0,
+      65
+    ],
+    "y": [
+      3584,
+      5632
+    ],
+    "x": [
+      24192,
+      27264
+    ]
+  },
+  "roi_selection_rule": "first window aligned to the 128-px block grid, in row-major order, with maximal supervision coverage at 1/32 scale (100%); ink labels not used. An earlier search that used an ink-fraction filter was discarded.",
+  "image_shape_zyx": [
+    65,
+    2048,
+    3072
+  ],
+  "axes_orientation": "z = layer index of the flattened surface volume (65 layers), y/x = surface pixels",
+  "intensity_preprocessing": "none (raw uint8)",
+  "mask_semantics": {
+    "ink": "255 = ink annotated; 0 = no ink (meaningful only where supervision = 255)",
+    "supervision": "255 = pixel annotated and usable for scoring; 0 = excluded",
+    "ink_layers": "stored on layer 32 only (all 64 other layers are 0)",
+    "supervision_layers": "stored on layer 32 only (all 64 other layers are 0)",
+    "provenance": "annotations come from the reading work on this scroll; no separate validation mask is provided"
+  },
+  "label_registration_transform": "none: labels and volume share the same zarr grid and chunking",
+  "counts": {
+    "pixels": 6291456,
+    "supervised": 6291456,
+    "ink_in_supervised": 1446892
+  },
+  "checksums_sha256": {
+    "volume": "78db9afe31d70723be3b9e5ad72b3b678fcdb855f1e238e798773aa13455b08b",
+    "ink": "1911eddff1b41cc8ac9865ce10fdce668fca7678f4509288dabf5b69e5ab06b3",
+    "supervision": "856a7d62e6bf8b1e8cd815bd086af8cd63158e81eeaacf2228e7179fe5f9dc7c"
+  },
+  "dependency_versions": {
+    "numpy": "2.5.5",
+    "zarr": "2.18.7",
+    "fsspec": "2026.9.0"
+  },
+  "output_file": "data/phercparis4_w00_y3584_x24192.npz"
+}
